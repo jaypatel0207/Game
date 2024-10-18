@@ -24,7 +24,20 @@ class LocalString extends Translations {
           'learn': 'Learn', 
           'hard': 'Hard', 
           'match' : 'Match', 
-          'recall' : 'Recall'
+          'recall' : 'Recall', 
+          'easy' : 'Easy', 
+          'medium' : 'Medium', 
+          'questions' : 'Questions', 
+          'ok' : 'OK', 
+          'selectedOptions': 'Selected Options', 
+          'levels' : 'Levels',
+          'wow' : 'Wow!', 
+          'correctanswer' : 'Correct Answer !', 
+          'next': 'Next', 
+          'sorry' : 'Sorry !', 
+          'wrongAnswer! Correct answer was': 'Wrong Answer! Correct answer was ', 
+          'trynext' : 'Try Next'
+
 
 
         
@@ -54,7 +67,22 @@ class LocalString extends Translations {
          'learn': 'सीखें',
          'hard': 'कठिन',
          'match' : 'मिलन', 
-         'recall' : 'याद करना'
+         'recall' : 'याद करना', 
+         'easy' : 'आसान', 
+         'medium' : 'मध्यम',
+         'questions' : 'प्रश्न', 
+         'ok' : 'ठीक',
+          'selectedOptions': 'चयनित विकल्प', 
+          'levels' : 'स्तर', 
+          'wow' : 'वाह!', 
+          'correctanswer' : 'सही उत्तर',
+          'next': 'अगला',
+          'sorry' : 'क्षमा', 
+          'wrongAnswer! Correct answer was': 'ग़लत उत्तर! सही उत्तर था', 
+          'trynext' : 'अगला प्रयास करें'
+
+         
+
 
         
      
@@ -82,6 +110,21 @@ class LocalString extends Translations {
           'hard': 'કઠિન',
           'match': 'મેળ', 
           'recall': 'યાદ કરો',
+          'easy' : 'સરળ', 
+          'medium' : 'મધ્યમ',
+          'questions' : 'પ્રશ્નો',
+          'ok' : 'સારું',
+          'selectedOptions': 'પસંદ કરેલ વિકલ્પો', 
+          'levels' : 'સ્તર',
+          'wow' : 'વાહ!',
+          'correctanswer' : 'સાચો જવાબ', 
+          'next' : 'આગળ', 
+          'sorry' : 'માફ કરશો', 
+          'wrongAnswer! Correct answer was' : 'ખોટો જવાબ! સાચો જવાબ હતો', 
+          'trynext' : 'આગળ પ્રયાસ કરો'
+
+
+      
 
 
           

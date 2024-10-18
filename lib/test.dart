@@ -11,8 +11,6 @@
 
 // // main.dart
 
-
-
 // void main() {
 //   runApp(const MathGame());
 // }
@@ -303,9 +301,6 @@
 //   }
 // }
 
-
-
-
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 
@@ -437,9 +432,6 @@
 //     );
 //   }
 // }
-
-
-
 
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
@@ -612,9 +604,168 @@
 //   }
 // }
 
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:game/controller/checkboxController.dart';
+// import 'package:get/get.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(
+//       title: 'Checkbox and Radio Button Example with GetX',
+//       home: CheckboxPage(),
+//     );
+//   }
+// }
+
+// class CheckboxPage extends StatelessWidget {
+//   // Instantiate the CheckboxController
+//   final CheckboxController checkboxController = Get.put(CheckboxController());
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Select Difficulty Levels and Questions'),
+//         centerTitle: true,
+//       ),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             // Checkboxes for selecting difficulty levels
+//             Obx(() => CheckboxListTile(
+//                   title: Text('Easy'),
+//                   value: checkboxController.isEasyChecked.value,
+//                   onChanged: (value) {
+//                     checkboxController.isEasyChecked.value = value ?? false;
+//                   },
+//                   controlAffinity: ListTileControlAffinity.leading, // Checkbox on the left
+//                 )),
+//             Obx(() => CheckboxListTile(
+//                   title: Text('Medium'),
+//                   value: checkboxController.isMediumChecked.value,
+//                   onChanged: (value) {
+//                     checkboxController.isMediumChecked.value = value ?? false;
+//                   },
+//                   controlAffinity: ListTileControlAffinity.leading, // Checkbox on the left
+//                 )),
+//             Obx(() => CheckboxListTile(
+//                   title: Text('Hard'),
+//                   value: checkboxController.isHardChecked.value,
+//                   onChanged: (value) {
+//                     checkboxController.isHardChecked.value = value ?? false;
+//                   },
+//                   controlAffinity: ListTileControlAffinity.leading, // Checkbox on the left
+//                 )),
+
+//             SizedBox(height: 20),
+
+//             // Radio buttons for selecting number of questions
+//             Text(
+//               'Questions:',
+//               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//             ),
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.start,
+//               children: [
+//                 // Radio button for 10 questions
+//                 Obx(() => Row(
+//                       children: [
+//                         Radio<int>(
+//                           value: 10,
+//                           groupValue: checkboxController.selectedQuestionCount.value,
+//                           onChanged: (value) {
+//                             checkboxController.selectedQuestionCount.value = value ?? 10;
+//                           },
+//                         ),
+//                         Text('10'),
+//                       ],
+//                     )),
+//           SizedBox(width: 10.w,),
+//                 Obx(() => Row(
+//                       children: [
+//                         Radio<int>(
+//                           value: 20,
+//                           groupValue: checkboxController.selectedQuestionCount.value,
+//                           onChanged: (value) {
+//                             checkboxController.selectedQuestionCount.value = value ?? 20;
+//                           },
+//                         ),
+//                         Text('20'),
+//                       ],
+//                     )),
+//                  SizedBox(width: 10.w,),
+//                 Obx(() => Row(
+//                       children: [
+//                         Radio<int>(
+//                           value: 30,
+//                           groupValue: checkboxController.selectedQuestionCount.value,
+//                           onChanged: (value) {
+//                             checkboxController.selectedQuestionCount.value = value ?? 30;
+//                           },
+//                         ),
+//                         Text('30'),
+//                       ],
+//                     )),
+//               ],
+//             ),
+
+//             SizedBox(height: 20),
+
+//             // Submit button to show selected options
+//             ElevatedButton(
+//               onPressed: () {
+//                 // Show selected options
+//                 String selectedLevels = '';
+//                 if (checkboxController.isEasyChecked.value) selectedLevels += 'Easy ';
+//                 if (checkboxController.isMediumChecked.value) selectedLevels += 'Medium ';
+//                 if (checkboxController.isHardChecked.value) selectedLevels += 'Hard ';
+//                 int selectedQuestions = checkboxController.selectedQuestionCount.value;
+
+//                 // Show a dialog with the selected options
+//                 showDialog(
+//                   context: context,
+//                   builder: (context) {
+//                     return AlertDialog(
+//                       title: Text('Selected Options'),
+//                       content: Text(
+//                           'Levels: ${selectedLevels.isEmpty ? 'None' : selectedLevels}\nQuestions: $selectedQuestions'),
+//                       actions: [
+//                         TextButton(
+//                           onPressed: () {
+//                             Navigator.of(context).pop();
+//                           },
+//                           child: Text('OK'),
+//                         ),
+//                       ],
+//                     );
+//                   },
+//                 );
+//               },
+//               child: Text('Submit'),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// math_controller.dart
+// lib/main.dart
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:game/controller/checkboxController.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:game/screens/home.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -625,145 +776,519 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Checkbox and Radio Button Example with GetX',
-      home: CheckboxPage(),
+      title: 'Math Game',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: MathGameScreen(),
     );
   }
 }
 
+// lib/controllers/math_controller.dart
 
-class CheckboxPage extends StatelessWidget {
-  // Instantiate the CheckboxController
-  final CheckboxController checkboxController = Get.put(CheckboxController());
+class MathController extends GetxController {
+  final Random _random = Random();
+  var num1 = 0.obs;
+  var num2 = 0.obs;
+  var userAnswer = ''.obs;
+  var correctCount = 0.obs;
+  var wrongCount = 0.obs;
+  var currentQuestion = 1.obs;
+  var totalQuestions = 10.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    generateNewQuestion();
+  }
+
+  void generateNewQuestion() {
+    num1.value = _random.nextInt(50);
+    num2.value = _random.nextInt(50);
+    userAnswer.value = '';
+  }
+
+  void addNumber(String number) {
+    if (userAnswer.value.length < 3) {
+      userAnswer.value += number;
+    }
+  }
+
+  void deleteNumber() {
+    if (userAnswer.value.isNotEmpty) {
+      userAnswer.value =
+          userAnswer.value.substring(0, userAnswer.value.length - 1);
+    }
+  }
+
+  void checkAnswer() {
+    int correctAnswer = num1.value + num2.value;
+    int? userAnswerNum = int.tryParse(userAnswer.value);
+
+    if (userAnswerNum != null) {
+      if (userAnswerNum == correctAnswer) {
+        correctCount++;
+        Get.defaultDialog(
+          title: 'Wow!',
+          middleText: 'Correct Answer!',
+          confirm: ElevatedButton(
+            onPressed: () {
+              Get.back();
+              proceedToNextQuestion();
+            },
+            child: Text('Next'),
+          ),
+        );
+      } else {
+        wrongCount++;
+        Get.defaultDialog(
+          title: 'Sorry!',
+          middleText: 'Wrong Answer! Correct answer was $correctAnswer',
+          confirm: ElevatedButton(
+            onPressed: () {
+              Get.back();
+              proceedToNextQuestion();
+            },
+            child: Text('Try Next'),
+          ),
+        );
+      }
+    }
+  }
+
+  void proceedToNextQuestion() {
+    if (currentQuestion.value < totalQuestions.value) {
+      currentQuestion++;
+      generateNewQuestion();
+    } else {
+      Get.off(() => ResultScreen());
+    }
+  }
+
+  void resetGame() {
+    correctCount.value = 0;
+    wrongCount.value = 0;
+    currentQuestion.value = 1;
+    generateNewQuestion();
+  }
+}
+
+// lib/screens/math_game_screen.dart
+
+class MathGameScreen extends StatelessWidget {
+  final MathController controller = Get.put(MathController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Select Difficulty Levels and Questions'),
-        centerTitle: true,
+      body: SafeArea(
+        child: Container(
+          color: Color(0xFF1a1a2e),
+          child: Column(
+            children: [
+              _buildHeader(),
+              _buildScoreBoard(),
+              _buildQuestionSection(),
+              _buildNumberPad(),
+            ],
+          ),
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Padding(
+      padding: EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.pink[100]),
+            onPressed: () => Get.back(),
+          ),
+          Obx(() => Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.blue[200],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  '${controller.currentQuestion} / ${controller.totalQuestions}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScoreBoard() {
+    return Padding(
+      padding: EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Obx(() => Text(
+                  '${controller.wrongCount}',
+                  style: TextStyle(color: Colors.white),
+                )),
+          ),
+          Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Obx(() => Text(
+                  '${controller.correctCount}',
+                  style: TextStyle(color: Colors.white),
+                )),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuestionSection() {
+    return Expanded(
+      child: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Checkboxes for selecting difficulty levels
-            Obx(() => CheckboxListTile(
-                  title: Text('Easy'),
-                  value: checkboxController.isEasyChecked.value,
-                  onChanged: (value) {
-                    checkboxController.isEasyChecked.value = value ?? false;
-                  },
-                  controlAffinity: ListTileControlAffinity.leading, // Checkbox on the left
+            Obx(() => Text(
+                  '${controller.num1} + ${controller.num2}',
+                  style: TextStyle(
+                    fontSize: 48,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 )),
-            Obx(() => CheckboxListTile(
-                  title: Text('Medium'),
-                  value: checkboxController.isMediumChecked.value,
-                  onChanged: (value) {
-                    checkboxController.isMediumChecked.value = value ?? false;
-                  },
-                  controlAffinity: ListTileControlAffinity.leading, // Checkbox on the left
-                )),
-            Obx(() => CheckboxListTile(
-                  title: Text('Hard'),
-                  value: checkboxController.isHardChecked.value,
-                  onChanged: (value) {
-                    checkboxController.isHardChecked.value = value ?? false;
-                  },
-                  controlAffinity: ListTileControlAffinity.leading, // Checkbox on the left
-                )),
-
-            SizedBox(height: 20),
-
-            // Radio buttons for selecting number of questions
-            Text(
-              'Questions:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // Radio button for 10 questions
-                Obx(() => Row(
-                      children: [
-                        Radio<int>(
-                          value: 10,
-                          groupValue: checkboxController.selectedQuestionCount.value,
-                          onChanged: (value) {
-                            checkboxController.selectedQuestionCount.value = value ?? 10;
-                          },
-                        ),
-                        Text('10'),
-                      ],
-                    )),
-          SizedBox(width: 10.w,), 
-                Obx(() => Row(
-                      children: [
-                        Radio<int>(
-                          value: 20,
-                          groupValue: checkboxController.selectedQuestionCount.value,
-                          onChanged: (value) {
-                            checkboxController.selectedQuestionCount.value = value ?? 20;
-                          },
-                        ),
-                        Text('20'),
-                      ],
-                    )),
-                 SizedBox(width: 10.w,),
-                Obx(() => Row(
-                      children: [
-                        Radio<int>(
-                          value: 30,
-                          groupValue: checkboxController.selectedQuestionCount.value,
-                          onChanged: (value) {
-                            checkboxController.selectedQuestionCount.value = value ?? 30;
-                          },
-                        ),
-                        Text('30'),
-                      ],
-                    )),
-              ],
-            ),
-
-            SizedBox(height: 20),
-
-            // Submit button to show selected options
-            ElevatedButton(
-              onPressed: () {
-                // Show selected options
-                String selectedLevels = '';
-                if (checkboxController.isEasyChecked.value) selectedLevels += 'Easy ';
-                if (checkboxController.isMediumChecked.value) selectedLevels += 'Medium ';
-                if (checkboxController.isHardChecked.value) selectedLevels += 'Hard ';
-                int selectedQuestions = checkboxController.selectedQuestionCount.value;
-
-                // Show a dialog with the selected options
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text('Selected Options'),
-                      content: Text(
-                          'Levels: ${selectedLevels.isEmpty ? 'None' : selectedLevels}\nQuestions: $selectedQuestions'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-              child: Text('Submit'),
+            SizedBox(height: 32),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 32,
+                vertical: 16,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.orange,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Obx(() => Text(
+                    controller.userAnswer.value.isEmpty
+                        ? '?'
+                        : controller.userAnswer.value,
+                    style: TextStyle(
+                      fontSize: 32,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
             ),
           ],
         ),
       ),
     );
   }
+
+  Widget _buildNumberPad() {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: GridView.count(
+        shrinkWrap: true,
+        crossAxisCount: 4,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        children: [
+          ...List.generate(
+              9,
+              (index) => NumberButton(
+                    number: '${index + 1}',
+                    onTap: () => controller.addNumber('${index + 1}'),
+                  )),
+          NumberButton(
+            number: '0',
+            onTap: () => controller.addNumber('0'),
+          ),
+          DeleteButton(
+            onTap: () => controller.deleteNumber(),
+          ),
+          CheckButton(
+            onTap: () => controller.checkAnswer(),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
+// lib/screens/result_screen.dart
+
+class ResultScreen extends StatelessWidget {
+  final MathController controller = Get.find<MathController>();
+
+  @override
+  Widget build(BuildContext context) {
+    int totalQuestions = controller.totalQuestions.value;
+    double percentage = (controller.correctCount.value / totalQuestions) * 100;
+
+    return Scaffold(
+      body: Container(
+        color: Color(0xFF1a1a2e),
+        child: SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Quiz Completed!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 40),
+                _buildScoreCard(totalQuestions, percentage),
+                SizedBox(height: 40),
+                _buildPlayAgainButton(),
+
+                SizedBox(height: 25.h,), 
+                ElevatedButton(
+      onPressed: () {
+       Get.to(Home());
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.red,
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+      child: Text(
+        'Home',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.white
+        ),
+      ),
+    )
+
+
+
+
+
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildScoreCard(int totalQuestions, double percentage) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        children: [
+          _buildScoreRow(
+            'Total Questions:',
+            totalQuestions.toString(),
+            Colors.blue[200]!,
+          ),
+          SizedBox(height: 20),
+          _buildScoreRow(
+            'Correct Answers:',
+            controller.correctCount.value.toString(),
+            Colors.green[300]!,
+          ),
+          SizedBox(height: 20),
+          _buildScoreRow(
+            'Wrong Answers:',
+            controller.wrongCount.value.toString(),
+            Colors.red[300]!,
+          ),
+          SizedBox(height: 20),
+          _buildScoreRow(
+            'Score Percentage:',
+            '${percentage.toStringAsFixed(1)}%',
+            Colors.purple[200]!,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScoreRow(String label, String value, Color color) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Text(
+            value,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPlayAgainButton() {
+    return ElevatedButton(
+      onPressed: () {
+        controller.resetGame();
+        Get.off(() => MathGameScreen());
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.green,
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+      child: Text(
+        'Play Again',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.white
+        ),
+      ),
+    );
+  }
+}
+
+// lib/widgets/number_button.dart
+
+class NumberButton extends StatelessWidget {
+  final String number;
+  final VoidCallback onTap;
+
+  NumberButton({required this.number, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 50.h,
+        width: 50.w,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border:
+                Border.all(width: 5, color: Color.fromRGBO(255, 255, 255, 0.5)),
+            color: getRandomColor()),
+        child: Center(
+          child: Text(
+            number,
+            style: TextStyle(
+                fontSize: 45,
+                fontWeight: FontWeight.w400,
+                fontFamily: 'PoetsenOne',
+                color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Color getRandomColor() {
+    final colors = [
+      Color.fromRGBO(241, 191, 94, 1),
+      Color.fromRGBO(160, 213, 183, 1),
+      Color.fromRGBO(239, 118, 75, 1),
+      Color.fromRGBO(156, 186, 255, 1),
+    ];
+
+    final random = Random();
+    return colors[random.nextInt(colors.length)];
+  }
+}
+
+// lib/widgets/delete_button.dart
+
+class DeleteButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  DeleteButton({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector( 
+      onTap: onTap,
+      child: Container(
+        height: 50.h,
+        width: 50.w,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Color.fromRGBO(156, 186, 255, 1),
+            border:
+                Border.all(width: 5, color: Color.fromRGBO(255, 255, 255, 0.5))),
+                child: SvgPicture.asset("assets/images/delete.svg", 
+                height: 40, 
+                width: 40, 
+                fit: BoxFit.scaleDown,
+                
+                ),
+      ),
+    );
+  }
+}
+
+// lib/widgets/check_button.dart
+
+class CheckButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  CheckButton({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return  GestureDetector( 
+      onTap: onTap,
+      child: Container(
+        height: 50.h,
+        width: 50.w,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.green,
+            border:
+                Border.all(width: 5, color: Color.fromRGBO(255, 255, 255, 0.5))),
+                child: Icon(Icons.check_rounded, color: Colors.white,size: 45,)
+      ),
+    );
+  }
+}

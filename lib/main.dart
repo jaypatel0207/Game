@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:game/LocalStrim.dart';
+import 'package:game/quiz.dart';
 import 'package:game/screens/home.dart';
 import 'package:game/test.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       builder: (_ , child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          locale: Locale('guj', 'IN'), 
+          locale: Locale('en', 'US'), 
           translations: LocalString(),
       
           
