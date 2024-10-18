@@ -760,535 +760,790 @@
 
 // math_controller.dart
 // lib/main.dart
-import 'dart:math';
+// import 'dart:math';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:game/screens/home.dart';
-import 'package:get/get.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_svg/svg.dart';
+// import 'package:game/screens/home.dart';
+// import 'package:get/get.dart';
 
-void main() {
-  runApp(MyApp());
-}
+// void main() {
+//   runApp(MyApp());
+// }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Math Game',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MathGameScreen(),
-    );
-  }
-}
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(
+//       title: 'Math Game',
+//       theme: ThemeData(
+//         primarySwatch: Colors.blue,
+//         visualDensity: VisualDensity.adaptivePlatformDensity,
+//       ),
+//       home: MathGameScreen(),
+//     );
+//   }
+// }
 
-// lib/controllers/math_controller.dart
+// // lib/controllers/math_controller.dart
 
-class MathController extends GetxController {
-  final Random _random = Random();
-  var num1 = 0.obs;
-  var num2 = 0.obs;
-  var userAnswer = ''.obs;
-  var correctCount = 0.obs;
-  var wrongCount = 0.obs;
-  var currentQuestion = 1.obs;
-  var totalQuestions = 10.obs;
+// class MathController extends GetxController {
+//   final Random _random = Random();
+//   var num1 = 0.obs;
+//   var num2 = 0.obs;
+//   var userAnswer = ''.obs;
+//   var correctCount = 0.obs;
+//   var wrongCount = 0.obs;
+//   var currentQuestion = 1.obs;
+//   var totalQuestions = 10.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    generateNewQuestion();
-  }
+//   @override
+//   void onInit() {
+//     super.onInit();
+//     generateNewQuestion();
+//   }
 
-  void generateNewQuestion() {
-    num1.value = _random.nextInt(50);
-    num2.value = _random.nextInt(50);
-    userAnswer.value = '';
-  }
+//   void generateNewQuestion() {
+//     num1.value = _random.nextInt(50);
+//     num2.value = _random.nextInt(50);
+//     userAnswer.value = '';
+//   }
 
-  void addNumber(String number) {
-    if (userAnswer.value.length < 3) {
-      userAnswer.value += number;
-    }
-  }
+//   void addNumber(String number) {
+//     if (userAnswer.value.length < 3) {
+//       userAnswer.value += number;
+//     }
+//   }
 
-  void deleteNumber() {
-    if (userAnswer.value.isNotEmpty) {
-      userAnswer.value =
-          userAnswer.value.substring(0, userAnswer.value.length - 1);
-    }
-  }
+//   void deleteNumber() {
+//     if (userAnswer.value.isNotEmpty) {
+//       userAnswer.value =
+//           userAnswer.value.substring(0, userAnswer.value.length - 1);
+//     }
+//   }
 
-  void checkAnswer() {
-    int correctAnswer = num1.value + num2.value;
-    int? userAnswerNum = int.tryParse(userAnswer.value);
+//   void checkAnswer() {
+//     int correctAnswer = num1.value + num2.value;
+//     int? userAnswerNum = int.tryParse(userAnswer.value);
 
-    if (userAnswerNum != null) {
-      if (userAnswerNum == correctAnswer) {
-        correctCount++;
-        Get.defaultDialog(
-          title: 'Wow!',
-          middleText: 'Correct Answer!',
-          confirm: ElevatedButton(
-            onPressed: () {
-              Get.back();
-              proceedToNextQuestion();
-            },
-            child: Text('Next'),
-          ),
-        );
-      } else {
-        wrongCount++;
-        Get.defaultDialog(
-          title: 'Sorry!',
-          middleText: 'Wrong Answer! Correct answer was $correctAnswer',
-          confirm: ElevatedButton(
-            onPressed: () {
-              Get.back();
-              proceedToNextQuestion();
-            },
-            child: Text('Try Next'),
-          ),
-        );
-      }
-    }
-  }
+//     if (userAnswerNum != null) {
+//       if (userAnswerNum == correctAnswer) {
+//         correctCount++;
+//         Get.defaultDialog(
+//           title: 'Wow!',
+//           middleText: 'Correct Answer!',
+//           confirm: ElevatedButton(
+//             onPressed: () {
+//               Get.back();
+//               proceedToNextQuestion();
+//             },
+//             child: Text('Next'),
+//           ),
+//         );
+//       } else {
+//         wrongCount++;
+//         Get.defaultDialog(
+//           title: 'Sorry!',
+//           middleText: 'Wrong Answer! Correct answer was $correctAnswer',
+//           confirm: ElevatedButton(
+//             onPressed: () {
+//               Get.back();
+//               proceedToNextQuestion();
+//             },
+//             child: Text('Try Next'),
+//           ),
+//         );
+//       }
+//     }
+//   }
 
-  void proceedToNextQuestion() {
-    if (currentQuestion.value < totalQuestions.value) {
-      currentQuestion++;
-      generateNewQuestion();
-    } else {
-      Get.off(() => ResultScreen());
-    }
-  }
+//   void proceedToNextQuestion() {
+//     if (currentQuestion.value < totalQuestions.value) {
+//       currentQuestion++;
+//       generateNewQuestion();
+//     } else {
+//       Get.off(() => ResultScreen());
+//     }
+//   }
 
-  void resetGame() {
-    correctCount.value = 0;
-    wrongCount.value = 0;
-    currentQuestion.value = 1;
-    generateNewQuestion();
-  }
-}
+//   void resetGame() {
+//     correctCount.value = 0;
+//     wrongCount.value = 0;
+//     currentQuestion.value = 1;
+//     generateNewQuestion();
+//   }
+// }
 
-// lib/screens/math_game_screen.dart
+// // lib/screens/math_game_screen.dart
 
-class MathGameScreen extends StatelessWidget {
-  final MathController controller = Get.put(MathController());
+// class MathGameScreen extends StatelessWidget {
+//   final MathController controller = Get.put(MathController());
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          color: Color(0xFF1a1a2e),
-          child: Column(
-            children: [
-              _buildHeader(),
-              _buildScoreBoard(),
-              _buildQuestionSection(),
-              _buildNumberPad(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: SafeArea(
+//         child: Container(
+//           color: Color(0xFF1a1a2e),
+//           child: Column(
+//             children: [
+//               _buildHeader(),
+//               _buildScoreBoard(),
+//               _buildQuestionSection(),
+//               _buildNumberPad(),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
-  Widget _buildHeader() {
-    return Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.pink[100]),
-            onPressed: () => Get.back(),
-          ),
-          Obx(() => Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.blue[200],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  '${controller.currentQuestion} / ${controller.totalQuestions}',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )),
-        ],
-      ),
-    );
-  }
+//   Widget _buildHeader() {
+//     return Padding(
+//       padding: EdgeInsets.all(16.0),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: [
+//           IconButton(
+//             icon: Icon(Icons.arrow_back, color: Colors.pink[100]),
+//             onPressed: () => Get.back(),
+//           ),
+//           Obx(() => Container(
+//                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+//                 decoration: BoxDecoration(
+//                   color: Colors.blue[200],
+//                   borderRadius: BorderRadius.circular(20),
+//                 ),
+//                 child: Text(
+//                   '${controller.currentQuestion} / ${controller.totalQuestions}',
+//                   style: TextStyle(
+//                     color: Colors.white,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//               )),
+//         ],
+//       ),
+//     );
+//   }
 
-  Widget _buildScoreBoard() {
-    return Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Obx(() => Text(
-                  '${controller.wrongCount}',
-                  style: TextStyle(color: Colors.white),
-                )),
-          ),
-          Container(
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Obx(() => Text(
-                  '${controller.correctCount}',
-                  style: TextStyle(color: Colors.white),
-                )),
-          ),
-        ],
-      ),
-    );
-  }
+//   Widget _buildScoreBoard() {
+//     return Padding(
+//       padding: EdgeInsets.all(16.0),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: [
+//           Container(
+//             padding: EdgeInsets.all(8),
+//             decoration: BoxDecoration(
+//               color: Colors.red,
+//               borderRadius: BorderRadius.circular(8),
+//             ),
+//             child: Obx(() => Text(
+//                   '${controller.wrongCount}',
+//                   style: TextStyle(color: Colors.white),
+//                 )),
+//           ),
+//           Container(
+//             padding: EdgeInsets.all(8),
+//             decoration: BoxDecoration(
+//               color: Colors.green,
+//               borderRadius: BorderRadius.circular(8),
+//             ),
+//             child: Obx(() => Text(
+//                   '${controller.correctCount}',
+//                   style: TextStyle(color: Colors.white),
+//                 )),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
 
-  Widget _buildQuestionSection() {
-    return Expanded(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Obx(() => Text(
-                  '${controller.num1} + ${controller.num2}',
-                  style: TextStyle(
-                    fontSize: 48,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )),
-            SizedBox(height: 32),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 32,
-                vertical: 16,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Obx(() => Text(
-                    controller.userAnswer.value.isEmpty
-                        ? '?'
-                        : controller.userAnswer.value,
-                    style: TextStyle(
-                      fontSize: 32,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+//   Widget _buildQuestionSection() {
+//     return Expanded(
+//       child: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Obx(() => Text(
+//                   '${controller.num1} + ${controller.num2}',
+//                   style: TextStyle(
+//                     fontSize: 48,
+//                     color: Colors.white,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 )),
+//             SizedBox(height: 32),
+//             Container(
+//               padding: EdgeInsets.symmetric(
+//                 horizontal: 32,
+//                 vertical: 16,
+//               ),
+//               decoration: BoxDecoration(
+//                 color: Colors.orange,
+//                 borderRadius: BorderRadius.circular(12),
+//               ),
+//               child: Obx(() => Text(
+//                     controller.userAnswer.value.isEmpty
+//                         ? '?'
+//                         : controller.userAnswer.value,
+//                     style: TextStyle(
+//                       fontSize: 32,
+//                       color: Colors.white,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   )),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
 
-  Widget _buildNumberPad() {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: GridView.count(
-        shrinkWrap: true,
-        crossAxisCount: 4,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        children: [
-          ...List.generate(
-              9,
-              (index) => NumberButton(
-                    number: '${index + 1}',
-                    onTap: () => controller.addNumber('${index + 1}'),
-                  )),
-          NumberButton(
-            number: '0',
-            onTap: () => controller.addNumber('0'),
-          ),
-          DeleteButton(
-            onTap: () => controller.deleteNumber(),
-          ),
-          CheckButton(
-            onTap: () => controller.checkAnswer(),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   Widget _buildNumberPad() {
+//     return Container(
+//       padding: EdgeInsets.all(16),
+//       child: GridView.count(
+//         shrinkWrap: true,
+//         crossAxisCount: 4,
+//         mainAxisSpacing: 8,
+//         crossAxisSpacing: 8,
+//         children: [
+//           ...List.generate(
+//               9,
+//               (index) => NumberButton(
+//                     number: '${index + 1}',
+//                     onTap: () => controller.addNumber('${index + 1}'),
+//                   )),
+//           NumberButton(
+//             number: '0',
+//             onTap: () => controller.addNumber('0'),
+//           ),
+//           DeleteButton(
+//             onTap: () => controller.deleteNumber(),
+//           ),
+//           CheckButton(
+//             onTap: () => controller.checkAnswer(),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-// lib/screens/result_screen.dart
+// // lib/screens/result_screen.dart
 
-class ResultScreen extends StatelessWidget {
-  final MathController controller = Get.find<MathController>();
+// class ResultScreen extends StatelessWidget {
+//   final MathController controller = Get.find<MathController>();
 
-  @override
-  Widget build(BuildContext context) {
-    int totalQuestions = controller.totalQuestions.value;
-    double percentage = (controller.correctCount.value / totalQuestions) * 100;
+//   @override
+//   Widget build(BuildContext context) {
+//     int totalQuestions = controller.totalQuestions.value;
+//     double percentage = (controller.correctCount.value / totalQuestions) * 100;
 
-    return Scaffold(
-      body: Container(
-        color: Color(0xFF1a1a2e),
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Quiz Completed!',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 40),
-                _buildScoreCard(totalQuestions, percentage),
-                SizedBox(height: 40),
-                _buildPlayAgainButton(),
+//     return Scaffold(
+//       body: Container(
+//         color: Color(0xFF1a1a2e),
+//         child: SafeArea(
+//           child: Center(
+//             child: Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Text(
+//                   'Quiz Completed!',
+//                   style: TextStyle(
+//                     color: Colors.white,
+//                     fontSize: 32,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//                 SizedBox(height: 40),
+//                 _buildScoreCard(totalQuestions, percentage),
+//                 SizedBox(height: 40),
+//                 _buildPlayAgainButton(),
 
-                SizedBox(height: 25.h,), 
-                ElevatedButton(
-      onPressed: () {
-       Get.to(Home());
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.red,
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-      ),
-      child: Text(
-        'Home',
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          color: Colors.white
-        ),
-      ),
-    )
-
-
+//                 SizedBox(height: 25.h,), 
+//                 ElevatedButton(
+//       onPressed: () {
+//        Get.to(Home());
+//       },
+//       style: ElevatedButton.styleFrom(
+//         backgroundColor: Colors.red,
+//         padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(15),
+//         ),
+//       ),
+//       child: Text(
+//         'Home',
+//         style: TextStyle(
+//           fontSize: 20,
+//           fontWeight: FontWeight.bold,
+//           color: Colors.white
+//         ),
+//       ),
+//     )
 
 
 
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 
-  Widget _buildScoreCard(int totalQuestions, double percentage) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        children: [
-          _buildScoreRow(
-            'Total Questions:',
-            totalQuestions.toString(),
-            Colors.blue[200]!,
-          ),
-          SizedBox(height: 20),
-          _buildScoreRow(
-            'Correct Answers:',
-            controller.correctCount.value.toString(),
-            Colors.green[300]!,
-          ),
-          SizedBox(height: 20),
-          _buildScoreRow(
-            'Wrong Answers:',
-            controller.wrongCount.value.toString(),
-            Colors.red[300]!,
-          ),
-          SizedBox(height: 20),
-          _buildScoreRow(
-            'Score Percentage:',
-            '${percentage.toStringAsFixed(1)}%',
-            Colors.purple[200]!,
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget _buildScoreRow(String label, String value, Color color) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Text(
-            value,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
-  Widget _buildPlayAgainButton() {
-    return ElevatedButton(
-      onPressed: () {
-        controller.resetGame();
-        Get.off(() => MathGameScreen());
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.green,
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-      ),
-      child: Text(
-        'Play Again',
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          color: Colors.white
-        ),
-      ),
-    );
-  }
-}
+//   Widget _buildScoreCard(int totalQuestions, double percentage) {
+//     return Container(
+//       padding: EdgeInsets.all(20),
+//       margin: EdgeInsets.symmetric(horizontal: 20),
+//       decoration: BoxDecoration(
+//         color: Colors.white.withOpacity(0.1),
+//         borderRadius: BorderRadius.circular(20),
+//       ),
+//       child: Column(
+//         children: [
+//           _buildScoreRow(
+//             'Total Questions:',
+//             totalQuestions.toString(),
+//             Colors.blue[200]!,
+//           ),
+//           SizedBox(height: 20),
+//           _buildScoreRow(
+//             'Correct Answers:',
+//             controller.correctCount.value.toString(),
+//             Colors.green[300]!,
+//           ),
+//           SizedBox(height: 20),
+//           _buildScoreRow(
+//             'Wrong Answers:',
+//             controller.wrongCount.value.toString(),
+//             Colors.red[300]!,
+//           ),
+//           SizedBox(height: 20),
+//           _buildScoreRow(
+//             'Score Percentage:',
+//             '${percentage.toStringAsFixed(1)}%',
+//             Colors.purple[200]!,
+//           ),
+//         ],
+//       ),
+//     );
+//   }
 
-// lib/widgets/number_button.dart
+//   Widget _buildScoreRow(String label, String value, Color color) {
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//       children: [
+//         Text(
+//           label,
+//           style: TextStyle(
+//             color: Colors.white,
+//             fontSize: 18,
+//           ),
+//         ),
+//         Container(
+//           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+//           decoration: BoxDecoration(
+//             color: color,
+//             borderRadius: BorderRadius.circular(15),
+//           ),
+//           child: Text(
+//             value,
+//             style: TextStyle(
+//               color: Colors.white,
+//               fontSize: 18,
+//               fontWeight: FontWeight.bold,
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
 
-class NumberButton extends StatelessWidget {
-  final String number;
-  final VoidCallback onTap;
+//   Widget _buildPlayAgainButton() {
+//     return ElevatedButton(
+//       onPressed: () {
+//         controller.resetGame();
+//         Get.off(() => MathGameScreen());
+//       },
+//       style: ElevatedButton.styleFrom(
+//         backgroundColor: Colors.green,
+//         padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(15),
+//         ),
+//       ),
+//       child: Text(
+//         'Play Again',
+//         style: TextStyle(
+//           fontSize: 20,
+//           fontWeight: FontWeight.bold,
+//           color: Colors.white
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-  NumberButton({required this.number, required this.onTap});
+// // lib/widgets/number_button.dart
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 50.h,
-        width: 50.w,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border:
-                Border.all(width: 5, color: Color.fromRGBO(255, 255, 255, 0.5)),
-            color: getRandomColor()),
-        child: Center(
-          child: Text(
-            number,
-            style: TextStyle(
-                fontSize: 45,
-                fontWeight: FontWeight.w400,
-                fontFamily: 'PoetsenOne',
-                color: Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
+// class NumberButton extends StatelessWidget {
+//   final String number;
+//   final VoidCallback onTap;
 
-  Color getRandomColor() {
-    final colors = [
-      Color.fromRGBO(241, 191, 94, 1),
-      Color.fromRGBO(160, 213, 183, 1),
-      Color.fromRGBO(239, 118, 75, 1),
-      Color.fromRGBO(156, 186, 255, 1),
-    ];
+//   NumberButton({required this.number, required this.onTap});
 
-    final random = Random();
-    return colors[random.nextInt(colors.length)];
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: onTap,
+//       child: Container(
+//         height: 50.h,
+//         width: 50.w,
+//         decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(20),
+//             border:
+//                 Border.all(width: 5, color: Color.fromRGBO(255, 255, 255, 0.5)),
+//             color: getRandomColor()),
+//         child: Center(
+//           child: Text(
+//             number,
+//             style: TextStyle(
+//                 fontSize: 45,
+//                 fontWeight: FontWeight.w400,
+//                 fontFamily: 'PoetsenOne',
+//                 color: Colors.white),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
-// lib/widgets/delete_button.dart
+//   Color getRandomColor() {
+//     final colors = [
+//       Color.fromRGBO(241, 191, 94, 1),
+//       Color.fromRGBO(160, 213, 183, 1),
+//       Color.fromRGBO(239, 118, 75, 1),
+//       Color.fromRGBO(156, 186, 255, 1),
+//     ];
 
-class DeleteButton extends StatelessWidget {
-  final VoidCallback onTap;
+//     final random = Random();
+//     return colors[random.nextInt(colors.length)];
+//   }
+// }
 
-  DeleteButton({required this.onTap});
+// // lib/widgets/delete_button.dart
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector( 
-      onTap: onTap,
-      child: Container(
-        height: 50.h,
-        width: 50.w,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Color.fromRGBO(156, 186, 255, 1),
-            border:
-                Border.all(width: 5, color: Color.fromRGBO(255, 255, 255, 0.5))),
-                child: SvgPicture.asset("assets/images/delete.svg", 
-                height: 40, 
-                width: 40, 
-                fit: BoxFit.scaleDown,
+// class DeleteButton extends StatelessWidget {
+//   final VoidCallback onTap;
+
+//   DeleteButton({required this.onTap});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector( 
+//       onTap: onTap,
+//       child: Container(
+//         height: 50.h,
+//         width: 50.w,
+//         decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(20),
+//             color: Color.fromRGBO(156, 186, 255, 1),
+//             border:
+//                 Border.all(width: 5, color: Color.fromRGBO(255, 255, 255, 0.5))),
+//                 child: SvgPicture.asset("assets/images/delete.svg", 
+//                 height: 40, 
+//                 width: 40, 
+//                 fit: BoxFit.scaleDown,
                 
-                ),
-      ),
-    );
-  }
-}
+//                 ),
+//       ),
+//     );
+//   }
+// }
 
-// lib/widgets/check_button.dart
+// // lib/widgets/check_button.dart
 
-class CheckButton extends StatelessWidget {
-  final VoidCallback onTap;
+// class CheckButton extends StatelessWidget {
+//   final VoidCallback onTap;
 
-  CheckButton({required this.onTap});
+//   CheckButton({required this.onTap});
 
-  @override
-  Widget build(BuildContext context) {
-    return  GestureDetector( 
-      onTap: onTap,
-      child: Container(
-        height: 50.h,
-        width: 50.w,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.green,
-            border:
-                Border.all(width: 5, color: Color.fromRGBO(255, 255, 255, 0.5))),
-                child: Icon(Icons.check_rounded, color: Colors.white,size: 45,)
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return  GestureDetector( 
+//       onTap: onTap,
+//       child: Container(
+//         height: 50.h,
+//         width: 50.w,
+//         decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(20),
+//             color: Colors.green,
+//             border:
+//                 Border.all(width: 5, color: Color.fromRGBO(255, 255, 255, 0.5))),
+//                 child: Icon(Icons.check_rounded, color: Colors.white,size: 45,)
+//       ),
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+//-------------------------
+
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:game/controller/quizController.dart';
+// import 'package:get/get.dart';
+// import 'dart:math';
+
+// void main() {
+//   runApp(GetMaterialApp(
+//     home: const MathQuizApp(),
+//     theme: ThemeData.dark(),
+//   ));
+// }
+
+// // Define the MathController first
+// class MathController extends GetxController {
+//   var correctAnswers = 0.obs;
+//   var wrongAnswers = 0.obs;
+//   var currentQuestion = 1.obs;
+//   var num1 = 0.obs;
+//   var num2 = 0.obs;
+//   var options = <int>[].obs;
+
+//   @override
+//   void onInit() {
+//     super.onInit();
+//     generateQuestion();
+//   }
+
+//   void generateQuestion() {
+//     num1.value = Random().nextInt(50);
+//     num2.value = Random().nextInt(50);
+//     int correctAnswer = num1.value + num2.value;
+
+//     List<int> newOptions = [correctAnswer];
+//     while (newOptions.length < 4) {
+//       int option = Random().nextInt(100);
+//       if (!newOptions.contains(option)) {
+//         newOptions.add(option);
+//       }
+//     }
+//     newOptions.shuffle();
+//     options.value = newOptions;
+//   }
+
+//   void checkAnswer(int selected) {
+//     if (selected == num1.value + num2.value) {
+//       correctAnswers++;
+//       Get.dialog(
+//         AlertDialog(
+//           title: const Text('Great!'),
+//           content: const Text('Correct Answer!'),
+//           actions: [
+//             TextButton(
+//               child: const Text('Next'),
+//               onPressed: () {
+//                 Get.back();
+//                 if (currentQuestion < 10) {
+//                   currentQuestion++;
+//                   generateQuestion();
+//                 } else {
+//                   showFinalScore();
+//                 }
+//               },
+//             ),
+//           ],
+//         ),
+//         barrierDismissible: false,
+//       );
+//     } else {
+//       wrongAnswers++;
+//       Get.dialog(
+//         AlertDialog(
+//           title: const Text('Wrong Answer'),
+//           content: Text('The correct answer was ${num1.value + num2.value}'),
+//           actions: [
+//             TextButton(
+//               child: const Text('Try Next'),
+//               onPressed: () {
+//                 Get.back();
+//                 if (currentQuestion < 10) {
+//                   currentQuestion++;
+//                   generateQuestion();
+//                 } else {
+//                   showFinalScore();
+//                 }
+//               },
+//             ),
+//           ],
+//         ),
+//         barrierDismissible: false,
+//       );
+//     }
+//   }
+
+//   void showFinalScore() {
+//     Get.dialog(
+//       AlertDialog(
+//         title: const Text('Quiz Completed!'),
+//         content: Text('Correct: $correctAnswers\nWrong: $wrongAnswers'),
+//         actions: [
+//           TextButton(
+//             child: const Text('Restart'),
+//             onPressed: () {
+//               Get.back();
+//               correctAnswers.value = 0;
+//               wrongAnswers.value = 0;
+//               currentQuestion.value = 1;
+//               generateQuestion();
+//             },
+//           ),
+//         ],
+//       ),
+//       barrierDismissible: false,
+//     );
+//   }
+// }
+
+// // MathQuizApp widget
+// class MathQuizApp extends StatelessWidget {
+//   const MathQuizApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // Initialize the controller
+//     final MathController controller = Get.put(MathController());
+//     final QuizController _controller = Get.put(QuizController());
+//     return Scaffold(
+//       body: SafeArea(
+//         child: Padding(
+//           padding: const EdgeInsets.all(20),
+//           child: Column(
+//             children: [
+//               // Progress and scores
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   IconButton(
+//                     icon: const Icon(Icons.arrow_back),
+//                     onPressed: () {},
+//                   ),
+//                   Obx(() => Text('${controller.currentQuestion} / 10')),
+//                   IconButton(
+//                     icon: const Icon(Icons.settings),
+//                     onPressed: () {},
+//                   ),
+//                 ],
+//               ),
+
+//               // Score tracking
+//               Padding(
+//                 padding: const EdgeInsets.symmetric(vertical: 20),
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                   children: [
+//                     Container(
+//                       padding: const EdgeInsets.all(10),
+//                       decoration: BoxDecoration(
+//                         color: Colors.red,
+//                         borderRadius: BorderRadius.circular(10),
+//                       ),
+//                       child: Obx(() => Text('${controller.wrongAnswers}')),
+//                     ),
+//                     Container(
+//                       padding: const EdgeInsets.all(10),
+//                       decoration: BoxDecoration(
+//                         color: Colors.purple,
+//                         borderRadius: BorderRadius.circular(10),
+//                       ),
+//                       child: const Icon(Icons.edit),
+//                     ),
+//                     Container(
+//                       padding: const EdgeInsets.all(10),
+//                       decoration: BoxDecoration(
+//                         color: Colors.green,
+//                         borderRadius: BorderRadius.circular(10),
+//                       ),
+//                       child: Obx(() => Text('${controller.correctAnswers}')),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+
+//               // Question
+//               Expanded(
+//                 child: Center(
+//                   child: Obx(() => Text(
+//                         '${controller.num1} + ${controller.num2}',
+//                         style: const TextStyle(
+//                             fontSize: 48, fontWeight: FontWeight.bold),
+//                       )),
+//                 ),
+//               ),
+
+//               // Question mark container
+//               Container(
+//                 width: double.infinity,
+//                 padding: const EdgeInsets.all(20),
+//                 margin: const EdgeInsets.symmetric(vertical: 20),
+//                 decoration: BoxDecoration(
+//                   color: Colors.orange,
+//                   borderRadius: BorderRadius.circular(15),
+//                 ),
+//                 child: const Text(
+//                   '?',
+//                   textAlign: TextAlign.center,
+//                   style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+//                 ),
+//               ),
+
+//               // Options
+//               Obx(() => GridView.count(
+//                     shrinkWrap: true,
+//                     crossAxisCount: 2,
+//                     mainAxisSpacing: 2,
+//                     crossAxisSpacing: 2,
+//                     children: controller.options.map((option) {
+//                       return ElevatedButton(
+//                         style: ElevatedButton.styleFrom(
+//                           backgroundColor: [
+//                             Colors.amber,
+//                             Colors.teal,
+//                             Colors.blue,
+//                             Colors.pink
+//                           ][controller.options.indexOf(option)],
+//                           shape: RoundedRectangleBorder(
+//                             borderRadius: BorderRadius.circular(15),
+//                           ),
+//                         ),
+//                         child: Text(
+//                           '$option',
+//                           style: const TextStyle(fontSize: 24),
+//                         ),
+//                         onPressed: () => controller.checkAnswer(option),
+//                       );
+//                     }).toList(),
+//                   )),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
